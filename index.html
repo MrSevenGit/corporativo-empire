@@ -91,7 +91,8 @@ body{background:radial-gradient(circle at top,#162032 0%,#090c12 100%);color:#f1
   <div id="tab-luxo" class="tab"></div>
   <div id="tab-perfil" class="tab"></div>
 </div>
-<div class="ad-banner" id="slot-anuncio">📢 ESPAÇO PUBLICITÁRIO (AdMob / Monetização)</div>
+<div class="ad-banner" id="slot-anuncio" onclick="bonusBanner()" style="cursor:pointer;background:linear-gradient(90deg,#1e293b,#0f172a);color:#fbbf24;border-top:1px solid #334155">🎁 PATROCÍNIO: Clique para ganhar bônus instantâneo!</div>
+<script>function bonusBanner(){window.open("https://uplcm.com","_blank");const premio=cliqueAtual()*25;estado.saldo+=premio;atualizarTopo();alert("🎉 Você ganhou "+fmt(premio)+" de bônus patrocinado!");}</script>
 <div class="nav">
   <button class="active" onclick="mudarAba('ganhar',this)"><span style="font-size:16px">💼</span>Ganhar</button>
   <button onclick="mudarAba('empresas',this)"><span style="font-size:16px">🏢</span>Empresas</button>
@@ -234,6 +235,7 @@ function clicar(e) {
 
 function assistirAnuncio() {
   if (bonusTempo > 0) return;
+  window.open("https://uplcm.com", "_blank");
   const modal = document.getElementById('modal-ad');
   const bar = document.getElementById('ad-bar');
   const status = document.getElementById('ad-status');
