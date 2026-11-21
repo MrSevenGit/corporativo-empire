@@ -1,198 +1,413 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta name="monetag" content="34d2e57cb7e89924e6cb7e4e0e6cfe58">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Crônicas RPG</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#121212">
-    <style>
-        * { box-sizing: border-box; user-select: none; }
-        body { background: #121212; color: #eee; font-family: system-ui, sans-serif; padding: 15px; max-width: 500px; margin: auto; }
-        .card { background: #1e1e24; padding: 16px; border-radius: 12px; margin-bottom: 14px; border: 1px solid #2e2e38; }
-        h2, h3 { margin: 0 0 10px 0; }
-        input { width: 100%; padding: 12px; margin: 6px 0 12px 0; border-radius: 8px; border: 1px solid #444; background: #121212; color: white; font-size: 16px; user-select: text; }
-        .hp-bar { background: #333; border-radius: 6px; overflow: hidden; height: 22px; margin: 8px 0; }
-        .hp-fill { background: #e63946; height: 100%; transition: width 0.25s; }
-        .btn { display: block; width: 100%; padding: 14px; margin: 8px 0; background: #4361ee; color: white; border-radius: 10px; font-weight: bold; border: none; font-size: 16px; }
-        .btn-red { background: #d90429; }
-        .btn-green { background: #2a9d8f; }
-        .btn-gold { background: #e9c46a; color: #111; }
-        .btn-dark { background: #333; font-size: 13px; padding: 8px; }
-        .log { background: #0a0a0c; padding: 12px; border-radius: 10px; font-family: monospace; font-size: 13px; color: #4cc9f0; min-height: 95px; border: 1px solid #222; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    </style>
+<script>(function(s){s.dataset.zone='12315574',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Corporativo Empire: Rich Guy</title>
+<link rel="manifest" href="manifest.json">
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");</script>
+<style>
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;user-select:none;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(circle at top,#162032 0%,#090c12 100%);color:#f1f5f9;margin:0;padding-bottom:135px;overflow-x:hidden}
+.header{background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);padding:12px 16px;border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.game-title{text-align:center;font-size:11px;font-weight:900;letter-spacing:1.2px;color:#fbbf24;text-transform:uppercase;margin-bottom:8px}
+.ceo-card{display:flex;align-items:center;justify-content:space-between;background:#1e293b;padding:8px 12px;border-radius:12px;margin-bottom:8px;border:1px solid #334155}
+.ceo-info{display:flex;align-items:center;gap:10px}
+.ceo-avatar{font-size:24px;background:#0f172a;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid #475569}
+.btn-sound{background:#0f172a;border:1px solid #334155;color:#fff;border-radius:10px;width:36px;height:36px;font-size:16px}
+.saldo{font-size:32px;font-weight:900;color:#10b981;text-shadow:0 0 18px rgba(16,185,129,0.35);text-align:center;margin:2px 0}
+.renda{font-size:12px;color:#94a3b8;font-weight:bold;text-align:center}
+.xp-bg{background:#1e293b;height:6px;border-radius:4px;overflow:hidden;margin-top:8px}
+.xp-fill{background:linear-gradient(90deg,#38bdf8,#818cf8);height:100%;width:10%;transition:width 0.3s}
+.ticker{background:#111827;color:#fbbf24;font-size:11px;padding:6px;text-align:center;font-weight:bold;border-bottom:1px solid #1f2937}
+.container{padding:14px;max-width:500px;margin:auto}
+.card{background:linear-gradient(145deg,#182030,#111622);border:1px solid #263147;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
+.btn-click{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;border:2px solid #60a5fa;width:100%;padding:28px 20px;border-radius:20px;font-size:21px;font-weight:900;margin-bottom:12px;box-shadow:0 8px 25px rgba(37,99,235,0.45);transition:transform 0.08s}
+.btn-click:active{transform:scale(0.95)}
+.btn{background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;padding:12px;border-radius:12px;font-weight:800;font-size:13px;width:100%;margin-top:8px;box-shadow:0 4px 12px rgba(16,185,129,0.25);transition:transform 0.08s}
+.btn:active{transform:scale(0.97)}
+.btn:disabled{background:#1e293b;color:#475569;box-shadow:none}
+.btn-sell{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;margin-top:6px}
+.btn-ad{background:linear-gradient(90deg,#f59e0b,#ea580c);color:#fff;margin-bottom:12px;border:1px solid #fbbf24}
+.row{display:flex;justify-content:space-between;align-items:center}
+.badge{background:#0f172a;border:1px solid #334155;padding:4px 9px;border-radius:8px;font-size:11px;color:#38bdf8;font-weight:bold}
+.ad-banner{position:fixed;bottom:58px;left:0;right:0;height:46px;background:#070a10;border-top:1px dashed #334155;display:flex;align-items:center;justify-content:center;font-size:11px;color:#64748b;z-index:9}
+.nav{position:fixed;bottom:0;left:0;right:0;height:58px;background:#0f172a;border-top:1px solid #1e293b;display:flex;justify-content:space-around;align-items:center;z-index:10}
+.nav button{background:none;border:none;color:#64748b;font-size:11px;font-weight:bold;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav button.active{color:#38bdf8;transform:translateY(-2px)}
+.tab{display:none}.tab.active{display:block;animation:fadeIn 0.2s}
+.up{color:#10b981}.down{color:#ef4444}
+.float-num{position:fixed;color:#34d399;font-weight:900;font-size:20px;pointer-events:none;text-shadow:0 2px 6px rgba(0,0,0,0.8);animation:floatUp 0.8s ease-out forwards;z-index:99}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-box{background:#182030;border:2px solid #f59e0b;border-radius:20px;padding:24px;max-width:340px;width:100%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.7)}
+.toast{position:fixed;top:15px;left:50%;transform:translateX(-50%);background:#10b981;color:#052e16;padding:10px 18px;border-radius:30px;font-weight:800;font-size:13px;z-index:110;box-shadow:0 4px 15px rgba(0,0,0,0.5);display:none}
+@keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-65px) scale(1.2)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+</style>
 </head>
 <body>
-    <div id="app"></div>
-    <script>
-        let usuarioAtual = sessionStorage.getItem("rpg_user_logado");
-        let j = null;
-        const pegarContas = () => JSON.parse(localStorage.getItem("rpg_todas_contas")) || {};
-        const salvarContas = (c) => localStorage.setItem("rpg_todas_contas", JSON.stringify(c));
+<div class="toast" id="toast-msg"></div>
+<div class="modal-bg" id="modal-ad">
+  <div class="modal-box">
+    <div style="font-size:38px;margin-bottom:8px">🎬</div>
+    <h3 style="margin:0 0 6px 0;color:#fbbf24">Patrocinador Corporativo</h3>
+    <p id="ad-status" style="font-size:13px;color:#cbd5e1;margin-bottom:14px">Carregando oferta...</p>
+    <div class="xp-bg" style="height:10px;margin-bottom:14px"><div class="xp-fill" id="ad-bar" style="width:0%;background:#f59e0b"></div></div>
+    <button class="btn" id="btn-fechar-ad" style="display:none" onclick="concluirAnuncio()">🔥 RESGATAR 2X AGORA</button>
+  </div>
+</div>
+<div class="header">
+  <div class="game-title">👑 CORPORATIVO EMPIRE: RICH GUY</div>
+  <div class="ceo-card">
+    <div class="ceo-info">
+      <div class="ceo-avatar" id="lbl-avatar">🧑</div>
+      <div>
+        <div style="font-size:13px;font-weight:800;color:#f8fafc" id="lbl-cargo">ESTAGIÁRIO</div>
+        <div style="font-size:11px;color:#94a3b8" id="lbl-prox-cargo">Meta: R$ 1.000,00</div>
+      </div>
+    </div>
+    <button class="btn-sound" id="btn-som" onclick="alternarSom()">🔊</button>
+  </div>
+  <div class="saldo" id="lbl-saldo">R$ 0,00</div>
+  <div class="renda" id="lbl-renda">📈 Renda Passiva: R$ 0,00 / seg</div>
+  <div class="xp-bg"><div class="xp-fill" id="barra-xp"></div></div>
+</div>
+<div class="ticker" id="lbl-noticia">📰 Mercado estável: bons negócios à vista!</div>
+<div class="container">
+  <div id="tab-ganhar" class="tab active">
+    <button class="btn-click" onclick="clicar(event)">💼 FECHAR CONTRATO<br><span style="font-size:14px;font-weight:normal;opacity:0.9" id="lbl-clique">+R$ 1,00 por toque</span></button>
+    <button class="btn btn-ad" id="btn-ad" onclick="assistirAnuncio()">🎬 PATROCÍNIO: Dobrar Toque por 30s</button>
+    <div class="card">
+      <div class="row"><strong>🎓 Capacitação Profissional</strong><span class="badge" id="lbl-nv-clique">Nível 1</span></div>
+      <button class="btn" id="btn-up-clique" onclick="melhorarClique()">Melhorar (R$ 25,00)</button>
+    </div>
+    <div class="card" id="card-banco"></div>
+  </div>
+  <div id="tab-empresas" class="tab"></div>
+  <div id="tab-imoveis" class="tab"></div>
+  <div id="tab-bolsa" class="tab"></div>
+  <div id="tab-luxo" class="tab"></div>
+  <div id="tab-perfil" class="tab"></div>
+</div>
+<div class="ad-banner" id="slot-anuncio">📢 ESPAÇO PUBLICITÁRIO (AdMob / Monetização)</div>
+<div class="nav">
+  <button class="active" onclick="mudarAba('ganhar',this)"><span style="font-size:16px">💼</span>Ganhar</button>
+  <button onclick="mudarAba('empresas',this)"><span style="font-size:16px">🏢</span>Empresas</button>
+  <button onclick="mudarAba('imoveis',this)"><span style="font-size:16px">🏠</span>Imóveis</button>
+  <button onclick="mudarAba('bolsa',this)"><span style="font-size:16px">📈</span>Bolsa</button>
+  <button onclick="mudarAba('luxo',this)"><span style="font-size:16px">💎</span>Luxo</button>
+  <button onclick="mudarAba('perfil',this)"><span style="font-size:16px">👤</span>Perfil</button>
+</div>
+<script>
+let travarSave = false;
+let bonusTempo = 0;
+let multEvento = 1;
+let somAtivo = true;
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-        function entrarOuCriar(modo) {
-            const user = document.getElementById("user").value.trim().toLowerCase();
-            const pass = document.getElementById("pass").value.trim();
-            if (!user || !pass) return alert("Preencha usuário e senha!");
-            const contas = pegarContas();
+function tocarSom(tipo) {
+  if (!somAtivo) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  const agora = audioCtx.currentTime;
+  if (tipo === 'moeda') {
+    osc.type = 'sine'; osc.frequency.setValueAtTime(980, agora); osc.frequency.exponentialRampToValueAtTime(1450, agora + 0.08);
+    gain.gain.setValueAtTime(0.12, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.08);
+    osc.start(agora); osc.stop(agora + 0.08);
+  } else if (tipo === 'compra') {
+    osc.type = 'triangle'; osc.frequency.setValueAtTime(520, agora); osc.frequency.setValueAtTime(780, agora + 0.07);
+    gain.gain.setValueAtTime(0.15, agora); gain.gain.exponentialRampToValueAtTime(0.01, agora + 0.18);
+    osc.start(agora); osc.stop(agora + 0.18);
+  }
+}
 
-            if (modo === "criar") {
-                if (contas[user]) return alert("Usuário já existe!");
-                contas[user] = {
-                    senha: pass,
-                    dados: {
-                        nome: user, hp: 100, hp_max: 100, ataque_base: 12, defesa_base: 2,
-                        arma: { nome: "Adaga Enferrujada", bonus: 3 },
-                        armadura: { nome: "Roupa de Pano", bonus: 1 },
-                        pocoes: 3, ouro: 30, nivel: 1,
-                        log: [`Conta de ${user} criada!`], inimigo: null
-                    }
-                };
-                salvarContas(contas);
-            } else if (!contas[user] || contas[user].senha !== pass) {
-                return alert("Usuário ou senha incorretos!");
-            }
-            usuarioAtual = user;
-            sessionStorage.setItem("rpg_user_logado", user);
-            carregarJogo();
-        }
+function mostrarToast(msg) {
+  const t = document.getElementById('toast-msg');
+  t.innerText = msg; t.style.display = 'block';
+  setTimeout(() => { t.style.display = 'none'; }, 2500);
+}
 
-        function sair() {
-            sessionStorage.removeItem("rpg_user_logado");
-            usuarioAtual = null; j = null; render();
-        }
+function alternarSom() {
+  somAtivo = !somAtivo;
+  document.getElementById('btn-som').innerText = somAtivo ? '🔊' : '🔇';
+  mostrarToast(somAtivo ? '🔊 Efeitos sonoros ativados' : '🔇 Modo silencioso');
+}
 
-        function carregarJogo() {
-            const contas = pegarContas();
-            if (usuarioAtual && contas[usuarioAtual]) j = contas[usuarioAtual].dados;
-            render();
-        }
+const listaConquistasBase = [
+  { id: "c1", nome: "💵 Primeiros R$ 1.000", desc: "Acumule R$ 1.000 em caixa", premio: 500, resgatada: false },
+  { id: "c2", nome: "📈 Lobo de Wall Street", desc: "Tenha pelo menos 10 ações", premio: 2500, resgatada: false },
+  { id: "c3", nome: "🎓 Especialista Sênior", desc: "Chegue ao Nível 10 de Capacitação", premio: 10000, resgatada: false },
+  { id: "c4", nome: "🏢 Dono de Negócios", desc: "Tenha pelo menos 10 empresas", premio: 15000, resgatada: false },
+  { id: "c5", nome: "🏠 Rei do Aluguel", desc: "Tenha pelo menos 5 imóveis", premio: 30000, resgatada: false },
+  { id: "c6", nome: "🪙 Baleia Cripto", desc: "Tenha pelo menos 1 Bitcoin (BTC)", premio: 80000, resgatada: false },
+  { id: "c7", nome: "💎 Primeiro Milhão", desc: "Alcance R$ 1.000.000 em caixa", premio: 250000, resgatada: false },
+  { id: "c8", nome: "🏭 Império Industrial", desc: "Tenha 50 empresas no total", premio: 1500000, resgatada: false },
+  { id: "c9", nome: "🛥️ Colecionador Supremo", desc: "Compre todos os 4 itens de Luxo", premio: 10000000, resgatada: false },
+  { id: "c10", nome: "👑 Rei do Mundo", desc: "Alcance R$ 1 Bilhão em caixa", premio: 250000000, resgatada: false }
+];
 
-        function salvar() {
-            const contas = pegarContas();
-            contas[usuarioAtual].dados = j;
-            salvarContas(contas);
-            render();
-        }
+function criarEstadoInicial() {
+  return {
+    saldo: 0, clique: 1, nvClique: 1, custoClique: 25, divida: 0, ultimoAcesso: Date.now(),
+    empresas: [
+      { nome: "🛒 Loja de Bairro", qtd: 0, custo: 50, renda: 2, mult: 1.18 },
+      { nome: "🚚 Frota de Entregas", qtd: 0, custo: 400, renda: 18, mult: 1.20 },
+      { nome: "🏭 Fábrica Tech", qtd: 0, custo: 3200, renda: 150, mult: 1.22 },
+      { nome: "🏦 Banco Digital", qtd: 0, custo: 25000, renda: 1200, mult: 1.25 },
+      { nome: "🛢️ Petrolífera", qtd: 0, custo: 200000, renda: 9500, mult: 1.28 }
+    ],
+    imoveis: [
+      { nome: "🏘️ Kitnet Alugada", qtd: 0, custo: 1200, aluguel: 12, mult: 1.15 },
+      { nome: "🏢 Apartamento Centro", qtd: 0, custo: 15000, aluguel: 160, mult: 1.16 },
+      { nome: "🏬 Galpão Logístico", qtd: 0, custo: 180000, aluguel: 2100, mult: 1.18 },
+      { nome: "🏙️ Arranha-Céu Comercial", qtd: 0, custo: 2500000, aluguel: 32000, mult: 1.20 }
+    ],
+    acoes: [
+      { ticker: "TECH4", nome: "Amazônia Tech", preco: 45, qtd: 0, var: 0 },
+      { ticker: "PETR3", nome: "PetroNorte", preco: 32, qtd: 0, var: 0 },
+      { ticker: "VALE3", nome: "Vale Mineral", preco: 68, qtd: 0, var: 0 }
+    ],
+    criptos: [
+      { ticker: "BTC", nome: "Bitcoin", preco: 320000, qtd: 0, var: 0 },
+      { ticker: "ETH", nome: "Ethereum", preco: 14000, qtd: 0, var: 0 },
+      { ticker: "SOL", nome: "Solana", preco: 750, qtd: 0, var: 0 }
+    ],
+    luxo: [
+      { nome: "⌚ Relógio Suíço", preco: 15000, comprado: false },
+      { nome: "🏎️ Carro Esportivo", preco: 120000, comprado: false },
+      { nome: "🛥️ Iate de Luxo", preco: 1500000, comprado: false },
+      { nome: "🏝️ Ilha Privada", preco: 25000000, comprado: false }
+    ],
+    conquistas: JSON.parse(JSON.stringify(listaConquistasBase))
+  };
+}
 
-        function addLog(msg) {
-            j.log.push(msg);
-            if (j.log.length > 5) j.log.shift();
-        }
+let estado = JSON.parse(localStorage.getItem('rich_guy_save')) || criarEstadoInicial();
+if (estado.divida === undefined) estado.divida = 0;
+if (!estado.conquistas) estado.conquistas = [];
+listaConquistasBase.forEach(nc => {
+  if (!estado.conquistas.some(c => c.id === nc.id)) estado.conquistas.push(JSON.parse(JSON.stringify(nc)));
+});
+function fmt(v) {
+  if (v >= 1e9) return "R$ " + (v/1e9).toFixed(2) + " Bi";
+  if (v >= 1e6) return "R$ " + (v/1e6).toFixed(2) + " Mi";
+  if (v >= 1e3) return "R$ " + (v/1e3).toFixed(2) + " Mil";
+  return "R$ " + v.toFixed(2).replace('.', ',');
+}
 
-        function explorar() {
-            const monstros = [
-                { nome: "Goblin Saqueador", hp: 45, hp_max: 45, ataque: 11, ouro: 25 },
-                { nome: "Esqueleto Guerreiro", hp: 75, hp_max: 75, ataque: 16, ouro: 45 },
-                { nome: "Orc Berserker", hp: 110, hp_max: 110, ataque: 22, ouro: 75 }
-            ];
-            j.inimigo = { ...monstros[Math.floor(Math.random() * monstros.length)] };
-            addLog(`⚠️ Um ${j.inimigo.nome} apareceu!`);
-            salvar();
-        }
+function rendaTotal() {
+  const base = estado.empresas.reduce((a, e) => a + (e.qtd * e.renda), 0) + estado.imoveis.reduce((a, i) => a + (i.qtd * i.aluguel), 0);
+  return base * multEvento;
+}
 
-        function atacar() {
-            if (!j.inimigo) return;
-            const atk = j.ataque_base + j.arma.bonus;
-            const dano = Math.floor(Math.random() * 9) + (atk - 3);
-            j.inimigo.hp -= dano;
-            addLog(`⚔️ Causou ${dano} de dano!`);
+function cliqueAtual() { return estado.clique * (bonusTempo > 0 ? 2 : 1); }
 
-            if (j.inimigo.hp <= 0) {
-                addLog(`🎉 Derrotou ${j.inimigo.nome}! +${j.inimigo.ouro} ouro!`);
-                j.ouro += j.inimigo.ouro; j.nivel++; j.ataque_base += 2; j.defesa_base++; j.hp_max += 15;
-                j.inimigo = null;
-            } else {
-                const def = j.defesa_base + j.armadura.bonus;
-                const danoIni = Math.max(1, (Math.floor(Math.random() * 7) + (j.inimigo.ataque - 3)) - def);
-                j.hp -= danoIni;
-                addLog(`💥 ${j.inimigo.nome} causou ${danoIni} de dano!`);
-                if (j.hp <= 0) {
-                    j.hp = j.hp_max; j.ouro = Math.floor(j.ouro / 2); j.inimigo = null;
-                    addLog("💀 Desmaiou e perdeu metade do ouro!");
-                }
-            }
-            salvar();
-        }
-        function usarPocao() {
-            if (j.pocoes > 0) { j.pocoes--; j.hp = Math.min(j.hp_max, j.hp + 50); addLog("🧪 +50 HP!"); }
-            else addLog("❌ Sem poções!");
-            salvar();
-        }
-        function fugir() { j.inimigo = null; addLog("🏃 Fugiu."); salvar(); }
-        function taverna() {
-            if (j.ouro >= 15) { j.ouro -= 15; j.hp = j.hp_max; addLog("🛏️ Vida cheia!"); }
-            else addLog("❌ Precisa de 15 ouro!");
-            salvar();
-        }
-        function comprarPocao() {
-            if (j.ouro >= 20) { j.ouro -= 20; j.pocoes++; addLog("🧪 +1 Poção!"); }
-            else addLog("❌ Precisa de 20 ouro!");
-            salvar();
-        }
-        function melhorarArma() {
-            if (j.ouro >= 50) { j.ouro -= 50; j.arma.bonus += 5; j.arma.nome = `Espada +${j.arma.bonus}`; addLog("⚒️ Arma +5!"); }
-            else addLog("❌ Precisa de 50 ouro!");
-            salvar();
-        }
-        function melhorarArmadura() {
-            if (j.ouro >= 50) { j.ouro -= 50; j.armadura.bonus += 4; j.armadura.nome = `Armadura +${j.armadura.bonus}`; addLog("🛡️ Armadura +4!"); }
-            else addLog("❌ Precisa de 50 ouro!");
-            salvar();
-        }
+function mudarAba(aba, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + aba).classList.add('active');
+  btn.classList.add('active');
+  renderizar();
+}
 
-        function render() {
-            if (!usuarioAtual || !j) {
-                document.getElementById("app").innerHTML = `
-                    <div class="card">
-                        <h2>⚔️ Crônicas RPG</h2>
-                        <input type="text" id="user" placeholder="Usuário">
-                        <input type="password" id="pass" placeholder="Senha">
-                        <button class="btn btn-green" onclick="entrarOuCriar('entrar')">Entrar</button>
-                        <button class="btn" onclick="entrarOuCriar('criar')">Criar Conta</button>
-                    </div>`;
-                return;
-            }
-            const pctHeroi = Math.max(0, (j.hp / j.hp_max) * 100);
-            let tela = j.inimigo ? `
-                <div class="card" style="border-color: #e63946;">
-                    <h3>👹 ${j.inimigo.nome}</h3>
-                    <div>❤️ HP: ${j.inimigo.hp}/${j.inimigo.hp_max}</div>
-                    <div class="hp-bar"><div class="hp-fill" style="width: ${(j.inimigo.hp / j.inimigo.hp_max) * 100}%;"></div></div>
-                    <button class="btn btn-red" onclick="atacar()">⚔️ Atacar</button>
-                    <div class="grid">
-                        <button class="btn btn-green" onclick="usarPocao()">🧪 Poção (${j.pocoes})</button>
-                        <button class="btn" onclick="fugir()">🏃 Fugir</button>
-                    </div>
-                </div>` : `
-                <div class="card">
-                    <button class="btn btn-red" onclick="explorar()">🗺️ Explorar Masmorra</button>
-                    <div class="grid">
-                        <button class="btn btn-green" onclick="taverna()">🛏️ Curar (15💰)</button>
-                        <button class="btn btn-gold" onclick="comprarPocao()">🧪 Poção (20💰)</button>
-                        <button class="btn" onclick="melhorarArma()">⚔️ +Arma (50💰)</button>
-                        <button class="btn" onclick="melhorarArmadura()">🛡️ +Armadura (50💰)</button>
-                    </div>
-                </div>`;
+function criarParticula(x, y, valor) {
+  const el = document.createElement('div');
+  el.className = 'float-num';
+  el.innerText = '+' + fmt(valor);
+  el.style.left = (x - 40) + 'px';
+  el.style.top = (y - 20) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 800);
+}
 
-            document.getElementById("app").innerHTML = `
-                <div class="card">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h2>🧙 ${j.nome} • Nv.${j.nivel}</h2>
-                        <button class="btn btn-dark" style="width:auto;" onclick="sair()">Sair</button>
-                    </div>
-                    <div>❤️ HP: ${j.hp}/${j.hp_max}</div>
-                    <div class="hp-bar"><div class="hp-fill" style="width: ${pctHeroi}%;"></div></div>
-                    <div style="font-size:14px;">⚔️ Atk: ${j.ataque_base + j.arma.bonus} | 🛡️ Def: ${j.defesa_base + j.armadura.bonus} | 💰 ${j.ouro} | 🧪 ${j.pocoes}</div>
-                </div>
-                ${tela}
-                <div class="log">${j.log.map(l => `<div>> ${l}</div>`).join("")}</div>`;
-        }
-        if (usuarioAtual) carregarJogo(); else render();
-    </script>
+function clicar(e) {
+  const ganho = cliqueAtual();
+  estado.saldo += ganho;
+  tocarSom('moeda');
+  if (e && e.clientX) criarParticula(e.clientX, e.clientY, ganho);
+  atualizarTopo();
+}
+
+function assistirAnuncio() {
+  if (bonusTempo > 0) return;
+  const modal = document.getElementById('modal-ad');
+  const bar = document.getElementById('ad-bar');
+  const status = document.getElementById('ad-status');
+  const btn = document.getElementById('btn-fechar-ad');
+  modal.style.display = 'flex';
+  btn.style.display = 'none';
+  bar.style.width = '0%';
+  status.innerText = 'Assistindo patrocinador (3s)...';
+  let prog = 0;
+  const iv = setInterval(() => {
+    prog += 10;
+    bar.style.width = prog + '%';
+    if (prog >= 100) {
+      clearInterval(iv);
+      status.innerText = 'Recompensa liberada! Toque abaixo para ativar.';
+      btn.style.display = 'block';
+      tocarSom('compra');
+    }
+  }, 300);
+}
+
+function concluirAnuncio() {
+  document.getElementById('modal-ad').style.display = 'none';
+  bonusTempo = 30;
+  mostrarToast('🔥 Bônus 2x ativado por 30 segundos!');
+  atualizarTopo();
+}
+
+function melhorarClique() {
+  if (estado.saldo >= estado.custoClique) {
+    estado.saldo -= estado.custoClique; estado.nvClique++; estado.clique *= 1.65; estado.custoClique *= 1.9;
+    tocarSom('compra'); mostrarToast('🎓 Capacitação evoluída!'); salvar(); renderizar();
+  }
+}
+
+function pegarEmprestimo() {
+  if (estado.divida > 0) return;
+  const valor = Math.max(500, Math.floor(estado.saldo * 0.5) + 500);
+  estado.saldo += valor; estado.divida = valor * 1.2;
+  tocarSom('compra'); mostrarToast(`🏦 Empréstimo de ${fmt(valor)} liberado!`); salvar(); renderizar();
+}
+
+function pagarDivida() {
+  if (estado.divida > 0 && estado.saldo >= estado.divida) {
+    estado.saldo -= estado.divida; estado.divida = 0;
+    tocarSom('compra'); mostrarToast('✅ Dívida quitada!'); salvar(); renderizar();
+  }
+}
+
+function comprarEmpresa(i) { let e = estado.empresas[i]; if (estado.saldo >= e.custo) { estado.saldo -= e.custo; e.qtd++; e.custo *= e.mult; tocarSom('compra'); salvar(); renderizar(); } }
+function comprarImovel(i) { let m = estado.imoveis[i]; if (estado.saldo >= m.custo) { estado.saldo -= m.custo; m.qtd++; m.custo *= m.mult; tocarSom('compra'); salvar(); renderizar(); } }
+function operarAtivo(l, i, t) { let a = estado[l][i]; if (t==='c' && estado.saldo>=a.preco) { estado.saldo-=a.preco; a.qtd++; tocarSom('compra'); } else if (t==='v' && a.qtd>0) { estado.saldo+=a.preco; a.qtd--; tocarSom('moeda'); } salvar(); renderizar(); }
+function comprarLuxo(i) { let l = estado.luxo[i]; if (!l.comprado && estado.saldo >= l.preco) { estado.saldo -= l.preco; l.comprado = true; tocarSom('compra'); mostrarToast(`💎 ${l.nome} adquirido!`); salvar(); renderizar(); } }
+
+function checarConquista(id) {
+  if (id === 'c1') return estado.saldo >= 1000;
+  if (id === 'c2') return estado.acoes.reduce((a, x) => a + x.qtd, 0) >= 10;
+  if (id === 'c3') return estado.nvClique >= 10;
+  if (id === 'c4') return estado.empresas.reduce((a, e) => a + e.qtd, 0) >= 10;
+  if (id === 'c5') return estado.imoveis.reduce((a, m) => a + m.qtd, 0) >= 5;
+  if (id === 'c6') return (estado.criptos.find(c => c.ticker === 'BTC')?.qtd || 0) >= 1;
+  if (id === 'c7') return estado.saldo >= 1000000;
+  if (id === 'c8') return estado.empresas.reduce((a, e) => a + e.qtd, 0) >= 50;
+  if (id === 'c9') return estado.luxo.every(l => l.comprado);
+  if (id === 'c10') return estado.saldo >= 1000000000;
+  return false;
+}
+
+function resgatarConquista(i) { let c = estado.conquistas[i]; if (!c.resgatada && checarConquista(c.id)) { c.resgatada = true; estado.saldo += c.premio; tocarSom('compra'); mostrarToast(`🏆 +${fmt(c.premio)} resgatados!`); salvar(); renderizar(); } }
+
+function resetarJogo() {
+  if (confirm("Apagar todo o progresso e voltar ao início?")) {
+    travarSave = true; localStorage.clear(); estado = criarEstadoInicial(); location.reload();
+  }
+}
+function atualizarTopo() {
+  document.getElementById('lbl-saldo').innerText = fmt(estado.saldo);
+  document.getElementById('lbl-renda').innerText = `📈 Renda Passiva: ${fmt(rendaTotal())} / seg`;
+  document.getElementById('lbl-clique').innerText = `+${fmt(cliqueAtual())} por toque`;
+  document.getElementById('lbl-nv-clique').innerText = `Nível ${estado.nvClique}`;
+  const b = document.getElementById('btn-up-clique');
+  b.innerText = `Melhorar (${fmt(estado.custoClique)})`;
+  b.disabled = estado.saldo < estado.custoClique;
+
+  const bad = document.getElementById('btn-ad');
+  if (bonusTempo > 0) { bad.innerText = `🔥 BÔNUS 2x ATIVO (${bonusTempo}s)`; bad.disabled = true; }
+  else { bad.innerText = `🎬 PATROCÍNIO: Dobrar Toque por 30s`; bad.disabled = false; }
+
+  const niveis = [
+    { min: 0, max: 1000, av: "🧑", nome: "ESTAGIÁRIO" },
+    { min: 1000, max: 50000, av: "📈", nome: "INVESTIDOR" },
+    { min: 50000, max: 1000000, av: "💼", nome: "EMPRESÁRIO" },
+    { min: 1000000, max: 1000000000, av: "💎", nome: "MILIONÁRIO" },
+    { min: 1000000000, max: 100000000000, av: "👑", nome: "BILIONÁRIO" }
+  ];
+  let atual = niveis;
+  for (let n of niveis) { if (estado.saldo >= n.min) atual = n; }
+  document.getElementById('lbl-avatar').innerText = atual.av;
+  document.getElementById('lbl-cargo').innerText = atual.nome;
+  document.getElementById('lbl-prox-cargo').innerText = atual.max >= 1e11 ? "Patamar Máximo!" : `Meta: ${fmt(atual.max)}`;
+  const pct = Math.min(100, Math.max(5, ((estado.saldo - atual.min) / (atual.max - atual.min)) * 100));
+  document.getElementById('barra-xp').style.width = pct + '%';
+}
+
+function renderizar() {
+  atualizarTopo();
+  const proxEmp = Math.max(500, Math.floor(estado.saldo * 0.5) + 500);
+  document.getElementById('card-banco').innerHTML = estado.divida > 0
+    ? `<div class="row"><strong>🏦 Banco Central</strong><span class="badge" style="color:#ef4444">Dívida Ativa</span></div>
+       <div style="font-size:12px;color:#94a3b8;margin-top:4px">Total a quitar (com juros): <strong>${fmt(estado.divida)}</strong></div>
+       <button class="btn btn-sell" ${estado.saldo < estado.divida ? 'disabled' : ''} onclick="pagarDivida()">Quitar Empréstimo (${fmt(estado.divida)})</button>`
+    : `<div class="row"><strong>🏦 Banco Central</strong><span class="badge">Crédito Disponível</span></div>
+       <div style="font-size:12px;color:#94a3b8;margin-top:4px">Pegue capital rápido para investir (20% de juros).</div>
+       <button class="btn" onclick="pegarEmprestimo()">Pegar Empréstimo (${fmt(proxEmp)})</button>`;
+
+  document.getElementById('tab-empresas').innerHTML = estado.empresas.map((e, i) => `
+    <div class="card"><div class="row"><strong>${e.nome}</strong><span class="badge">x${e.qtd}</span></div>
+    <div style="font-size:12px;color:#94a3b8;margin-top:4px">Lucro: ${fmt(e.qtd * e.renda)}/s (+${fmt(e.renda)}/s)</div>
+    <button class="btn" ${estado.saldo < e.custo ? 'disabled' : ''} onclick="comprarEmpresa(${i})">Expandir (${fmt(e.custo)})</button></div>`).join('');
+
+  document.getElementById('tab-imoveis').innerHTML = estado.imoveis.map((m, i) => `
+    <div class="card"><div class="row"><strong>${m.nome}</strong><span class="badge">x${m.qtd}</span></div>
+    <div style="font-size:12px;color:#94a3b8;margin-top:4px">Aluguel: ${fmt(m.qtd * m.aluguel)}/s (+${fmt(m.aluguel)}/s)</div>
+    <button class="btn" ${estado.saldo < m.custo ? 'disabled' : ''} onclick="comprarImovel(${i})">Comprar Imóvel (${fmt(m.custo)})</button></div>`).join('');
+
+  const renderM = (t, l) => `<h4 style="margin:8px 0;color:#38bdf8">${t}</h4>` + estado[l].map((a, i) => `
+    <div class="card"><div class="row"><strong>${a.ticker} - ${a.nome}</strong><span class="badge">Qtd: ${a.qtd}</span></div>
+    <div style="font-size:17px;font-weight:bold;margin:6px 0">${fmt(a.preco)} <span class="${a.var>=0?'up':'down'}">(${a.var>=0?'▲':'▼'} ${Math.abs(a.var).toFixed(1)}%)</span></div>
+    <button class="btn" ${estado.saldo < a.preco ? 'disabled' : ''} onclick="operarAtivo('${l}',${i},'c')">Comprar 1</button>
+    <button class="btn btn-sell" ${a.qtd <= 0 ? 'disabled' : ''} onclick="operarAtivo('${l}',${i},'v')">Vender 1</button></div>`).join('');
+  document.getElementById('tab-bolsa').innerHTML = renderM("📈 Ações", "acoes") + renderM("🪙 Criptomoedas", "criptos");
+
+  document.getElementById('tab-luxo').innerHTML = estado.luxo.map((l, i) => `
+    <div class="card"><div class="row"><strong>${l.nome}</strong><span class="badge">${l.comprado ? '✅ Adquirido' : fmt(l.preco)}</span></div>
+    ${!l.comprado ? `<button class="btn" ${estado.saldo < l.preco ? 'disabled' : ''} onclick="comprarLuxo(${i})">Comprar (${fmt(l.preco)})</button>` : ''}</div>`).join('');
+
+  document.getElementById('tab-perfil').innerHTML = `
+    <div class="card"><div class="row"><strong>Gestão de Conta</strong><span class="badge">Save Local Ativo</span></div>
+    <button class="btn btn-sell" onclick="resetarJogo()">🗑️ Resetar Progresso</button></div>
+    <h4 style="margin:12px 0 8px 0;color:#38bdf8">🏆 Conquistas (${estado.conquistas.filter(c=>c.resgatada).length}/${estado.conquistas.length})</h4>` + estado.conquistas.map((c, i) => {
+    const p = checarConquista(c.id);
+    return `<div class="card"><div class="row"><strong>${c.nome}</strong><span class="badge">+${fmt(c.premio)}</span></div>
+      <div style="font-size:12px;color:#94a3b8;margin-top:4px">${c.desc}</div>
+      ${c.resgatada ? '<div style="color:#10b981;font-size:12px;margin-top:8px;font-weight:bold">✅ Resgatado</div>' :
+      `<button class="btn" ${!p ? 'disabled' : ''} onclick="resgatarConquista(${i})">${p ? '🎁 Resgatar' : '🔒 Bloqueada'}</button>`}</div>`;
+  }).join('');
+}
+
+function salvar() { if (!travarSave) { estado.ultimoAcesso = Date.now(); localStorage.setItem('rich_guy_save', JSON.stringify(estado)); } }
+
+setInterval(() => {
+  if (bonusTempo > 0) bonusTempo--;
+  if (rendaTotal() > 0) estado.saldo += rendaTotal();
+  salvar(); renderizar();
+}, 1000);
+
+setInterval(() => {
+  estado.acoes.forEach(a => { const m = (Math.random()*0.20)-0.095; a.var = m*100; a.preco = Math.max(5, a.preco*(1+m)); });
+  estado.criptos.forEach(c => { const m = (Math.random()*0.45)-0.21; c.var = m*100; c.preco = Math.max(50, c.preco*(1+m)); });
+  if (document.getElementById('tab-bolsa').classList.contains('active')) renderizar();
+}, 3000);
+
+setInterval(() => {
+  const ev = [
+    { txt: "🚀 BOOM ECONÔMICO: Renda das empresas dobrada (2x)!", mult: 2 },
+    { txt: "📰 Mercado estável: bons negócios à vista!", mult: 1 },
+    { txt: "📉 RECESSÃO LEVE: Renda reduzida em 30% temporariamente.", mult: 0.7 }
+  ];
+  const sorteio = ev[Math.floor(Math.random() * ev.length)];
+  multEvento = sorteio.mult;
+  document.getElementById('lbl-noticia').innerText = sorteio.txt;
+}, 20000);
+
+renderizar();
+</script>
 </body>
 </html>
